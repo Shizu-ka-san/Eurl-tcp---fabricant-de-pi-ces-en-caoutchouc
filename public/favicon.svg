@@ -1,0 +1,36 @@
+<svg viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="yellowGrad" cx="50%" cy="45%">
+      <stop offset="0%" stop-color="#FFF200" />
+      <stop offset="70%" stop-color="#FFC107" />
+      <stop offset="100%" stop-color="#F39C12" />
+    </radialGradient>
+    <radialGradient id="orangeGrad" cx="50%" cy="40%">
+      <stop offset="0%" stop-color="#FDBA74" />
+      <stop offset="100%" stop-color="#ED7D31" />
+    </radialGradient>
+    <linearGradient id="redGrad" x1="0%" x2="100%">
+      <stop offset="0%" stop-color="#ff3b30" />
+      <stop offset="100%" stop-color="#c40000" />
+    </linearGradient>
+  </defs>
+
+  <!-- Grand anneau jaune -->
+  <ellipse cx="400" cy="300" rx="330" ry="120" fill="url(#yellowGrad)" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.85"/>
+  <ellipse cx="400" cy="245" rx="250" ry="80" fill="#f8fafc" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.85"/>
+
+  <!-- Anneau orange -->
+  <ellipse cx="400" cy="235" rx="230" ry="70" fill="url(#orangeGrad)" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.85"/>
+  <ellipse cx="400" cy="235" rx="160" ry="48" fill="#f8fafc" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.85"/>
+
+  <!-- Anneau rouge -->
+  <ellipse cx="400" cy="225" rx="120" ry="36" fill="url(#redGrad)" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.85"/>
+  <ellipse cx="400" cy="225" rx="65" ry="18" fill="#f8fafc" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.85"/>
+
+  <!-- Axe central -->
+  <path d="M 400,10 L 396,60 L 396,243 L 404,243 L 404,60 Z" fill="#111111"/>
+  <line x1="400" y1="261" x2="400" y2="283" stroke="#111111" stroke-width="8" stroke-linecap="round"/>
+  <line x1="400" y1="305" x2="400" y2="325" stroke="#111111" stroke-width="8" stroke-linecap="round"/>
+  <line x1="400" y1="420" x2="400" y2="475" stroke="#111111" stroke-width="8" stroke-linecap="round"/>
+  <path d="M 396,475 Q 396,495 388,505 H 412 Q 404,495 404,475 Z" fill="#111111"/>
+</svg>

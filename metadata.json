@@ -1,0 +1,8 @@
+{
+  "name": "Remix: Eurl TCP - Fabricant de Pièces en Caoutchouc",
+  "description": "Site officiel de Eurl TCP, spécialiste de la fabrication d\u0027articles en caoutchouc en moyennes et grandes séries, moulage par injection et vulcanisation par compression.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

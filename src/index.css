@@ -1,0 +1,428 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Lora", Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-display: "Lora", Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+/* Custom scrollbar and ambient visual adjustments */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F9F9F7;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1A1A1A;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #444444;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #F9F9F7;
+  color: #1A1A1A;
+  overflow-x: hidden;
+}
+
+/* Custom fade-in and slide-up transition styles */
+.reveal-on-scroll {
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Style for react-markdown renderer to match professional look */
+.markdown-body {
+  line-height: 1.625;
+}
+.markdown-body h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.25rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: #1A1A1A;
+}
+.markdown-body h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-top: 1.25rem;
+  margin-bottom: 0.35rem;
+  color: #1A1A1A;
+}
+.markdown-body p {
+  margin-bottom: 0.85rem;
+  color: #333333;
+}
+.markdown-body ul, .markdown-body ol {
+  margin-left: 1.25rem;
+  margin-bottom: 0.85rem;
+  list-style-type: disc;
+}
+.markdown-body li {
+  margin-bottom: 0.25rem;
+  color: #333333;
+}
+.markdown-body strong {
+  font-weight: 600;
+  color: #1A1A1A;
+}
+
+/* ==========================================================================
+   OLED THEME (PITCH BLACK) SYSTEM
+   ========================================================================== */
+.theme-oled {
+  background-color: #000000 !important;
+  color: #F9F9F7 !important;
+}
+
+.theme-oled body {
+  background-color: transparent !important;
+  color: #F9F9F7 !important;
+}
+
+/* Custom OLED selection colors */
+.theme-oled ::selection {
+  background-color: #F9F9F7 !important;
+  color: #000000 !important;
+}
+
+/* Scrollbar styling for OLED mode */
+.theme-oled ::-webkit-scrollbar-track {
+  background: #000000 !important;
+}
+
+.theme-oled ::-webkit-scrollbar-thumb {
+  background: #27272A !important;
+  border: 1px solid #3F3F46;
+}
+
+.theme-oled ::-webkit-scrollbar-thumb:hover {
+  background: #3F3F46 !important;
+}
+
+/* Typography contrast corrections */
+.theme-oled h1,
+.theme-oled h2,
+.theme-oled h3,
+.theme-oled h4,
+.theme-oled h5,
+.theme-oled h6 {
+  color: #FFFFFF !important;
+}
+
+/* --------------------------------------------------------------------------
+   GLOBAL OVERRIDES FOR ALL NEUTRAL AND INTERACTIVE ELEMENTS IN OLED MODE
+   -------------------------------------------------------------------------- */
+
+/* Target every container using standard Light Neutral classes */
+.theme-oled .bg-white,
+.theme-oled .bg-zinc-50,
+.theme-oled .bg-zinc-100,
+.theme-oled .bg-neutral-50,
+.theme-oled .bg-neutral-100,
+.theme-oled .bg-neutral-50\/70,
+.theme-oled .bg-zinc-50\/70,
+.theme-oled .bg-zinc-50\/50,
+.theme-oled .bg-neutral-50\/50 {
+  background-color: #000000 !important;
+}
+
+/* Sub-card layers (very subtle charcoal highlight) */
+.theme-oled .bg-zinc-100\/50,
+.theme-oled .bg-neutral-100\/50,
+.theme-oled .bg-neutral-50\/70,
+.theme-oled .bg-\[\#F9F9F7\]\/50,
+.theme-oled .bg-zinc-900\/5,
+.theme-oled .bg-black\/5,
+.theme-oled .bg-black\/\[0\.04\],
+.theme-oled .bg-black\/\[0\.02\] {
+  background-color: #0A0A0B !important;
+}
+
+.theme-oled .bg-\[\#F9F9F7\] {
+  background-color: #000000 !important;
+}
+
+.theme-oled .bg-\[\#F9F9F7\]\/85 {
+  background-color: rgba(0, 0, 0, 0.85) !important;
+}
+
+.theme-oled .bg-\[\#F9F9F7\]\/75 {
+  background-color: rgba(0, 0, 0, 0.75) !important;
+}
+
+.theme-oled .bg-[#F9F9F7]/30 {
+  background-color: rgba(0, 0, 0, 0.3) !important;
+}
+
+.theme-oled .bg-emerald-600\/10 {
+  background-color: rgba(16, 185, 129, 0.1) !important;
+}
+
+/* Border overrides (Neutral & Zinc to zinc-800 / zinc-700) */
+.theme-oled .border-zinc-100,
+.theme-oled .border-zinc-200,
+.theme-oled .border-zinc-300,
+.theme-oled .border-neutral-100,
+.theme-oled .border-neutral-200,
+.theme-oled .border-neutral-300,
+.theme-oled .border-neutral-200\/80,
+.theme-oled .border-neutral-100\/60,
+.theme-oled .border-\[\#1A1A1A\]\/5,
+.theme-oled .border-\[\#1A1A1A\]\/10,
+.theme-oled .border-\[\#1A1A1A\]\/15,
+.theme-oled .border-\[\#1A1A1A\]\/20,
+.theme-oled .border-\[\#1A1A1A\]\/25,
+.theme-oled .border-\[\#1A1A1A\]\/30,
+.theme-oled .border-\[\#1A1A1A\]\/35,
+.theme-oled .border-\[\#1A1A1A\]\/40,
+.theme-oled .border-\[\#1A1A1A\]\/50,
+.theme-oled .border-\[\#1A1A1A\] {
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+.theme-oled .border-zinc-400,
+.theme-oled .border-neutral-400 {
+  border-color: #52525B !important;
+}
+
+/* Typography corrections: Dark texts to bright readable texts */
+.theme-oled .text-zinc-950,
+.theme-oled .text-zinc-900,
+.theme-oled .text-zinc-800,
+.theme-oled .text-neutral-900,
+.theme-oled .text-neutral-800,
+.theme-oled .text-neutral-950,
+.theme-oled .text-neutral-700,
+.theme-oled .text-neutral-600,
+.theme-oled .text-\[\#1A1A1A\],
+.theme-oled .text-\[\#1A1A1A\]\/95,
+.theme-oled .text-\[\#1A1A1A\]\/90,
+.theme-oled .text-\[\#1A1A1A\]\/85,
+.theme-oled .text-\[\#1A1A1A\]\/80 {
+  color: #FFFFFF !important;
+}
+
+.theme-oled .text-zinc-700,
+.theme-oled .text-zinc-600,
+.theme-oled .text-\[\#1A1A1A\]\/75,
+.theme-oled .text-\[\#1A1A1A\]\/70 {
+  color: #E4E4E7 !important; /* light gray zinc-200 */
+}
+
+.theme-oled .text-zinc-500,
+.theme-oled .text-zinc-400,
+.theme-oled .text-neutral-500,
+.theme-oled .text-neutral-400,
+.theme-oled .text-\[\#1A1A1A\]\/65,
+.theme-oled .text-\[\#1A1A1A\]\/60,
+.theme-oled .text-\[\#1A1A1A\]\/55,
+.theme-oled .text-\[\#1A1A1A\]\/50 {
+  color: #A1A1AA !important; /* mid gray zinc-400 */
+}
+
+.theme-oled .text-\[\#1A1A1A\]\/45,
+.theme-oled .text-\[\#1A1A1A\]\/40,
+.theme-oled .text-\[\#1A1A1A\]\/35,
+.theme-oled .text-\[\#1A1A1A\]\/30 {
+  color: #71717A !important; /* dark gray zinc-500 */
+}
+
+/* Highlighted badges & cards */
+.theme-oled .bg-orange-50 {
+  background-color: rgba(234, 88, 12, 0.15) !important;
+  color: #FB923C !important;
+}
+.theme-oled .border-orange-100\/80,
+.theme-oled .border-orange-100,
+.theme-oled .border-orange-200 {
+  border-color: rgba(234, 88, 12, 0.4) !important;
+}
+.theme-oled .text-orange-700,
+.theme-oled .text-orange-800 {
+  color: #FB923C !important;
+}
+
+/* Header highlight lines (editorial accents) */
+.theme-oled .border-l-4.border-\[\#1A1A1A\] {
+  border-color: #EA580C !important; /* Orange accent left border */
+}
+
+.theme-oled .border-b.border-\[\#1A1A1A\]\/10,
+.theme-oled .border-t.border-\[\#1A1A1A\]\/10,
+.theme-oled section {
+  border-color: #1F1F22 !important;
+}
+
+/* Navigation & Header */
+.theme-oled #main-header {
+  border-color: #27272A !important;
+}
+
+.theme-oled .text-\[\#1A1A1A\]\/50.hover\:text-\[\#1A1A1A\]:hover,
+.theme-oled .text-\[\#1a1a1a\]\/50.hover\:text-\[\#1a1a1a\]:hover,
+.theme-oled .text-\[\#1A1A1A\]\/60.hover\:text-\[\#1A1A1A\]:hover,
+.theme-oled .text-\[\#1a1a1a\]\/60.hover\:text-\[\#1a1a1a\]:hover {
+  color: #FFFFFF !important;
+}
+
+/* Custom high-contrast primary CTA for OLED mode - Premium Brand Orange */
+.theme-oled .oled-primary-cta {
+  background-color: #EA580C !important;
+  color: #FFFFFF !important;
+  border-color: #EA580C !important;
+}
+.theme-oled .oled-primary-cta:hover {
+  background-color: #F97316 !important;
+  color: #FFFFFF !important;
+  border-color: #F97316 !important;
+}
+.theme-oled .oled-primary-cta span,
+.theme-oled .oled-primary-cta svg {
+  color: #FFFFFF !important;
+}
+
+/* Primary buttons & CTA brand orange styling under OLED Mode - Precise Interactive selectors */
+.theme-oled button.bg-\[\#1A1A1A\],
+.theme-oled button.bg-\[\#1a1a1a\],
+.theme-oled a.bg-\[\#1A1A1A\],
+.theme-oled a.bg-\[\#1a1a1a\],
+.theme-oled [role="button"].bg-\[\#1A1A1A\],
+.theme-oled [role="button"].bg-\[\#1a1a1a\],
+.theme-oled input\[type="submit"\].bg-\[\#1A1A1A\],
+.theme-oled input\[type="submit"\].bg-\[\#1a1a1a\] {
+  background-color: #EA580C !important;
+  color: #FFFFFF !important;
+  border-color: #EA580C !important;
+}
+
+.theme-oled button.bg-\[\#1A1A1A\] span,
+.theme-oled button.bg-\[\#1a1a1a\] span,
+.theme-oled button.bg-\[\#1A1A1A\] svg,
+.theme-oled button.bg-\[\#1a1a1a\] svg,
+.theme-oled a.bg-\[\#1A1A1A\] span,
+.theme-oled a.bg-\[\#1a1a1a\] span,
+.theme-oled a.bg-\[\#1A1A1A\] svg,
+.theme-oled a.bg-\[\#1a1a1a\] svg,
+.theme-oled [role="button"].bg-\[\#1A1A1A\] span,
+.theme-oled [role="button"].bg-\[\#1a1a1a\] span,
+.theme-oled [role="button"].bg-\[\#1A1A1A\] svg,
+.theme-oled [role="button"].bg-\[\#1a1a1a\] svg {
+  color: #FFFFFF !important;
+}
+
+.theme-oled button.hover\:bg-\[\#333333\]:hover,
+.theme-oled button.hover\:bg-\[\#333333\]:hover,
+.theme-oled a.hover\:bg-\[\#333333\]:hover,
+.theme-oled a.hover\:bg-\[\#333333\]:hover,
+.theme-oled [role="button"].hover\:bg-\[\#333333\]:hover,
+.theme-oled [role="button"].hover\:bg-\[\#333333\]:hover {
+  background-color: #F97316 !important;
+  border-color: #F97316 !important;
+}
+
+/* Maintain dark layout/sidebar panels with bg-[#1A1A1A] instead of turning them white */
+.theme-oled div.bg-\[\#1A1A1A\],
+.theme-oled div.bg-\[\#1a1a1a\],
+.theme-oled section.bg-\[\#1A1A1A\],
+.theme-oled section.bg-\[\#1a1a1a\],
+.theme-oled aside.bg-\[\#1A1A1A\],
+.theme-oled aside.bg-\[\#1a1a1a\] {
+  background-color: #0C0C0E !important;
+  color: #FFFFFF !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Secondary outline buttons */
+.theme-oled .border-\[\#1A1A1A\],
+.theme-oled .border-\[\#1a1a1a\] {
+  border-color: #3F3F46 !important;
+  color: #FFFFFF !important;
+}
+
+.theme-oled .hover\:bg-\[\#1A1A1A\]\/5:hover,
+.theme-oled .hover\:bg-\[\#1a1a1a\]\/5:hover {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* BorderGlow Cards inside OLED theme (Pitch Black background override) */
+.theme-oled .border-glow-card {
+  --card-bg: #000000 !important;
+  --border-color: rgba(255, 255, 255, 0.1) !important;
+  background: #000000 !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* AI Bureau Chat styling */
+.theme-oled .bg-amber-500\/5 {
+  background-color: rgba(245, 158, 11, 0.05) !important;
+}
+
+/* Inputs and interactive states in OLED mode */
+.theme-oled input,
+.theme-oled textarea,
+.theme-oled select {
+  background-color: #000000 !important;
+  border-color: #27272A !important;
+  color: #FFFFFF !important;
+}
+
+.theme-oled input:focus,
+.theme-oled textarea:focus,
+.theme-oled select:focus {
+  border-color: #EA580C !important;
+  box-shadow: 0 0 0 1px #EA580C !important;
+}
+
+.theme-oled label {
+  color: #A1A1AA !important;
+}
+
+.theme-oled .text-amber-800 {
+  color: #FBBF24 !important;
+}
+
+.theme-oled .text-orange-950 {
+  color: #FFEDD5 !important;
+}
+
+/* Chat bubble styling */
+.theme-oled .bg-white.text-\[\#1A1A1A\].border-\[\#1A1A1A\]\/10 {
+  background-color: #0A0A0C !important;
+  border-color: #27272A !important;
+  color: #FFFFFF !important;
+}
+
+/* Markdown typography in OLED Mode */
+.theme-oled .markdown-body h3,
+.theme-oled .markdown-body h4,
+.theme-oled .markdown-body strong {
+  color: #FFFFFF !important;
+}
+
+.theme-oled .markdown-body p,
+.theme-oled .markdown-body li {
+  color: #D4D4D8 !important;
+}
+
+.theme-oled .markdown-body ul,
+.theme-oled .markdown-body ol {
+  border-color: #27272A !important;
+}
+
+/* Preloader logo matching background color */
+.theme-oled #preloader-logo {
+  filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.05)) !important;
+}
+
+
