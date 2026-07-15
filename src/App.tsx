@@ -21,6 +21,8 @@ export default function App() {
   const [isAdminOpen, setIsAdminOpen] = useState(false);
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
+  const [isCatalogLoaded, setIsCatalogLoaded] = useState(false);
+  const [isTimerFinished, setIsTimerFinished] = useState(false);
   const [theme, setTheme] = useState<"light" | "oled">(() => {
     if (typeof window !== "undefined") {
       return (localStorage.getItem("tcp_theme") as "light" | "oled") || "light";
@@ -40,42 +42,40 @@ export default function App() {
 
   // Fetch initial data from server
   useEffect(() => {
+    let active = true;
     const fetchCatalog = async () => {
-      setIsLoading(true);
       try {
         const [categoriesRes, productsRes] = await Promise.all([
           fetch("/api/categories"),
           fetch("/api/products")
         ]);
 
-        if (categoriesRes.ok) {
+        if (categoriesRes.ok && productsRes.ok) {
           const cats = await categoriesRes.json();
-          setCategories(cats);
-        } else {
-          const savedCats = localStorage.getItem("tcp_catalog_categories");
-          setCategories(savedCats ? JSON.parse(savedCats) : INITIAL_CATEGORIES);
-        }
-
-        if (productsRes.ok) {
           const prods = await productsRes.json();
-          setProducts(prods);
+          if (active) {
+            setCategories(cats);
+            setProducts(prods);
+            setIsCatalogLoaded(true);
+          }
         } else {
-          const savedProds = localStorage.getItem("tcp_catalog_products");
-          setProducts(savedProds ? JSON.parse(savedProds) : PRODUCTS);
+          console.warn("Base de données non connectée ou vide. Nouvelle tentative dans 3s...");
+          setTimeout(() => {
+            if (active) fetchCatalog();
+          }, 3000);
         }
       } catch (err) {
-        console.error("Échec de connexion aux endpoints de l'API. Utilisation du localStorage/Données initiales.");
-        const savedCats = localStorage.getItem("tcp_catalog_categories");
-        setCategories(savedCats ? JSON.parse(savedCats) : INITIAL_CATEGORIES);
-        
-        const savedProds = localStorage.getItem("tcp_catalog_products");
-        setProducts(savedProds ? JSON.parse(savedProds) : PRODUCTS);
-      } finally {
-        setIsLoading(false);
+        console.error("Échec de connexion à la base de données. Nouvelle tentative dans 3s...");
+        setTimeout(() => {
+          if (active) fetchCatalog();
+        }, 3000);
       }
     };
 
     fetchCatalog();
+    return () => {
+      active = false;
+    };
   }, []);
 
   // Sync to local storage as secondary backup
@@ -222,7 +222,7 @@ export default function App() {
 
     // Simulate initial asset & WebGL loader
     const timer = setTimeout(() => {
-      setIsLoading(false);
+      setIsTimerFinished(true);
     }, 2400);
     return () => {
       clearTimeout(timer);
@@ -230,6 +230,13 @@ export default function App() {
       if (scrollActionTimeoutRef.current) clearTimeout(scrollActionTimeoutRef.current);
     };
   }, []);
+
+  // Hide loading preloader only when both catalog data is loaded and aesthetic animation timer is finished
+  useEffect(() => {
+    if (isCatalogLoaded && isTimerFinished) {
+      setIsLoading(false);
+    }
+  }, [isCatalogLoaded, isTimerFinished]);
 
   // Force landing on the absolute top of the page (accueil section) when the preloader ends
   useEffect(() => {

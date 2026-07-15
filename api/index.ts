@@ -573,10 +573,10 @@ app.get("/api/categories", async (req, res) => {
       return res.json(result.rows);
     } catch (err: any) {
       console.error("Erreur GET /api/categories :", err.message);
-      // graceful fallback to local memory
+      return res.status(500).json({ error: err.message });
     }
   }
-  return res.json(localCategories);
+  return res.status(503).json({ error: "Base de données non connectée" });
 });
 
 // Endpoint 3: Create / Upsert Category
@@ -657,10 +657,10 @@ app.get("/api/products", async (req, res) => {
       return res.json(mapped);
     } catch (err: any) {
       console.error("Erreur GET /api/products :", err.message);
-      // fallback
+      return res.status(500).json({ error: err.message });
     }
   }
-  return res.json(localProducts);
+  return res.status(503).json({ error: "Base de données non connectée" });
 });
 
 // Endpoint 6: Create or Update (Upsert) Product
