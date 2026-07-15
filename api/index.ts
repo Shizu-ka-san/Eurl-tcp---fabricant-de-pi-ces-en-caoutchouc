@@ -535,12 +535,31 @@ async function initializeDatabase() {
   }
 }
 
+let initPromise: Promise<void> | null = null;
+
+async function ensureDatabaseReady() {
+  if (!pool) return;
+  if (!initPromise) {
+    initPromise = initializeDatabase();
+  }
+  await initPromise;
+}
+
 // Perform database initialization asynchronously
 if (pool) {
-  initializeDatabase().catch(err => {
+  ensureDatabaseReady().catch(err => {
     console.error("Échec critique de l'initialisation DB :", err);
   });
 }
+
+const ensureDbMiddleware = async (req: any, res: any, next: any) => {
+  await ensureDatabaseReady();
+  next();
+};
+
+app.use("/api/categories", ensureDbMiddleware);
+app.use("/api/products", ensureDbMiddleware);
+app.use("/api/devis", ensureDbMiddleware);
 
 // ========================================================
 // ENDPOINTS CATALOGUE : CATÉGORIES & PRODUITS
