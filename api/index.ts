@@ -4,7 +4,6 @@ dotenv.config();
 import express from "express";
 import path from "path";
 import { GoogleGenAI } from "@google/genai";
-import { createServer as createViteServer } from "vite";
 import pg from "pg";
 const { Pool } = pg;
 
@@ -792,13 +791,17 @@ app.post("/api/devis", async (req, res) => {
 
 // Vite integration middleware for development
 if (process.env.NODE_ENV !== "production" && !process.env.VERCEL) {
-  createViteServer({
-    server: { middlewareMode: true },
-    appType: "spa",
-  }).then((vite) => {
-    app.use(vite.middlewares);
+  import("vite").then(({ createServer }) => {
+    createServer({
+      server: { middlewareMode: true },
+      appType: "spa",
+    }).then((vite) => {
+      app.use(vite.middlewares);
+    }).catch((err) => {
+      console.error("Échec de l'initialisation de Vite middleware :", err);
+    });
   }).catch((err) => {
-    console.error("Échec de l'initialisation de Vite middleware :", err);
+    console.error("Échec du chargement de Vite :", err);
   });
 } else {
   // Production static files serving
